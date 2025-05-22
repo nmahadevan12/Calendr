@@ -35,45 +35,84 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Want to try the project on your own PC?
+## 🚀 Want to Try the Project on Your Own PC?
 
-Go to [https://clerk.com] with your browser, create an account, and sign in.
+Follow these steps to get the project up and running locally with **Clerk** and **Google OAuth**:
 
-Create an application and type in a name. Make sure to only select Google as the sign in options.
+---
 
-Follow the instructions to install Clerk, and edit your .env file with your PUBLIC and SECRET keys.
+### 1. Set Up Clerk
 
-Go back to Clerk and click on Configure. Then, click on SSO Connections. 
+1. Visit [https://clerk.com](https://clerk.com) in your browser.
+2. Create an account and sign in.
+3. Create a new application and give it a name.
+4. Under **Sign-In Options**, enable **Google** only.
+5. Follow the instructions to install Clerk.
+6. Add your **Clerk Public** and **Secret Keys** to your `.env` file.
 
-Edit the Google OAuth provider by toggling on Use custum credentials.
+---
 
-Copy your Authorized Redirect URI and sign into your Google Console page [https://console.cloud.google.com].
+### 2. Configure Google OAuth in Clerk
 
-Click NEW PROJECT, add a name, and click create.
+1. In the Clerk Dashboard, go to **Configure > SSO Connections**.
+2. Edit the **Google OAuth** provider.
+3. Toggle on **Use custom credentials**.
+4. Copy the **Authorized Redirect URI** shown — you'll need it in the next step.
 
-Navigate to APIs & Services, click on Credentials, click on Configure consent screen, and click Get started.
+---
 
-Add the App name and your email or another user support email and click Next.
+### 3. Set Up a Google Cloud Project
 
-Choose External and click Next.
+1. Go to [Google Cloud Console](https://console.cloud.google.com).
+2. Click **NEW PROJECT**, enter a name, and click **Create**.
+3. Navigate to **APIs & Services > Credentials**.
+4. Click **Configure Consent Screen** and then **Get Started**.
+5. Choose **External**, then click **Next**.
+6. Fill in the **App name**, **User support email**, and click **Next**.
+7. On the next screen, provide a notification email address, then click **Next**.
+8. Agree to the **Google API Services Terms**, then click **Create**.
 
-Enter the email address you would like to recieve notifications if there are changes to your project and click Next.
+---
 
-Check that you agree to the Google API Services policy and click Create.
+### 4. Create OAuth Credentials
 
-Click Create OAuth Client, choose Web application, enter a name you will recognize, add the Authorized redirect URI you copied earleir from Clerk, and click Create.
+1. Click **Create Credentials > OAuth Client ID**.
+2. Choose **Web application**.
+3. Enter a recognizable name.
+4. Paste the **Authorized Redirect URI** you copied from Clerk.
+5. Click **Create**.
+6. Copy your **Google Client ID** and **Google Client Secret**.
+7. Paste both into your `.env` file.
 
-Copy the GOOGLE CLIENT ID and the GOOGLE CLIENT SECRET and paste it in the .env file.
+---
 
-Go back to your Clerk page and paste it in designated spots where you copied the Authorized redirect URI from.
+### 5. Final Configuration
 
-Go back to your Google Console page and click on Data Access and then click on Add or remove scopes.
+1. Return to your Clerk dashboard.
+2. Paste the **Google Client ID** and **Secret** in the fields where the redirect URI was shown.
+3. Back in the **Google Cloud Console**, go to **Data Access > Add or remove scopes**.
+4. Select the following scopes:
+   - `openid`
+   - `https://www.googleapis.com/auth/userinfo.email`
+   - `https://www.googleapis.com/auth/userinfo.profile`
+   - `https://www.googleapis.com/auth/calendar.events`
+5. Click **Update**.
 
-Check the first 3 items (/auth/userinfo.email, /auth/userinfo.profile, openid) and add this scope: https://www.googleapis.com/auth/calendar.events
+---
 
-Click Update and go to the Branding section. The bare mininum you need to fill to have the applicaiton working is the App name, User support email, Authorized domain which is accounts.dev, and the developer contact information.
+### 6. Complete Branding Section (Minimum Required)
 
-Now, you can run run the development server and test your application: 
+Fill in the following fields:
+- **App name**
+- **User support email**
+- **Authorized domain** → `accounts.dev`
+- **Developer contact information**
+
+---
+
+### ✅ You're Ready!
+
+Start your development server:
 
 ```bash
 npm run dev
@@ -83,4 +122,3 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
