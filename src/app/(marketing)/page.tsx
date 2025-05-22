@@ -29,7 +29,6 @@ export default async function HomePage() {
                 </div>
             </section>
 
-            {/* Footer Section */}
             <footer className="bg-blue-800 text-white py-4">
                 <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
                     <p className="text-sm">&copy; {new Date().getFullYear()} Calendr. All rights reserved.</p>
